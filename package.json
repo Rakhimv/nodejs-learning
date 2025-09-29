@@ -12,11 +12,14 @@
   "dependencies": {
     "@abandonware/noble": "^1.9.2-26",
     "axios": "^1.12.2",
+    "bcrypt": "^6.0.0",
     "cheerio": "^1.1.2",
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "loudness": "^0.4.2",
     "node-wifi": "^2.0.16",
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "ws": "^8.18.3"
   }
 }

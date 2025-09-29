@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="myform">
+        <input type="text" id="name">
+        <input type="text" id="text">
+        <button>SEND</button>
+    </form>
+    <div class="chat">
+
+    </div>
+
+    <script>
+        const chatbox = document.querySelector(".chat")
+        const myform = document.getElementById("myform")
+
+        const server = new WebSocket("ws://localhost:5555");
+
+        server.onopen = () => {
+            console.log("✅ Соединение установлено");
+        };
+
+        server.onmessage = (message) => {
+
+            const div = document.createElement("div")
+            div.innerHTML = `
+                <p style="color:red;">${JSON.parse(message.data).name}:    ${JSON.parse(message.data).text}</p>
+              
+            `
+            chatbox.appendChild(div)
+        }
+
+
+        myform.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (server.readyState === WebSocket.OPEN) {
+                server.send(JSON.stringify({
+                    name: e.target[0].value,
+                    text: e.target[1].value
+                }))
+            }
+        });
+
+    </script>
+
+
+</body>
+
+</html>
